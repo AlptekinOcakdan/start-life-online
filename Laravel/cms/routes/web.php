@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Country;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -122,6 +123,31 @@ Route::get('user/pivot',function (){
    }
 });
 
-Route::get('/user/country',function (){
-
+Route::get('/user/{id}/country',function ($id){
+    //user'a ait countr_id ye göre çağırır.
+    $country=Country::find($id);
+    foreach ($country->posts as $post){
+        return $post->title;
+    }
 });
+
+//Polymorphic Relations
+
+Route::get('user/photos',function (){
+    $user=User::find(1);
+
+    foreach ($user->photos as $photo){
+        return $photo;
+    }
+});
+Route::get('post/photos',function (){
+    $post=Post::find(1);
+
+    foreach ($post->photos as $photo){
+        return $photo;
+    }
+});
+
+
+
+
