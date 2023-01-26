@@ -81,4 +81,14 @@ class PostsController extends Controller
     {
         //
     }
+
+    public function contact(){
+        $people=['Alptekin','Fırat','Murat','Ömer'];
+        return view('contact',compact('people'));
+    }
+    public function showPost($id,$name){
+//        return view('post')->with('id',$id);
+        return view('post',compact('id','name'));
+    }
+
 }
